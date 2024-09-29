@@ -8,7 +8,7 @@
     "start": "node index.js"
   },  
   "author": "DTI",  
-  "license": "MIT" 
+  "license": "MIT",
   "dependencies": {  
     "nodemailer": "*"
   },  
