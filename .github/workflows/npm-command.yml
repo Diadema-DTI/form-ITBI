@@ -12,15 +12,15 @@ jobs:
 
     steps:  
     - name: Checkout repository  
-      uses: actions/checkout@v3  # Updated to version 3  
+      uses: actions/checkout@v3  # Keep this up to date  
 
     - name: Set up Node.js  
-      uses: actions/setup-node@v3  # Updated to version 3  
+      uses: actions/setup-node@v3  # Keep this up to date  
       with:  
-        node-version: '18'  # You can choose a stable LTS version, e.g., 14, 16, or 18  
+        node-version: '20'  # Set this to Node.js 20 to align with current best practices  
 
     - name: Install npm dependencies  
-      run: npm install  
+      run: npm install crypto crypto-js nodemailer
 
     - name: Run npm command  
       run: npm run your-command  # Replace with your actual npm command
