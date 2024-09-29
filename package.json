@@ -5,12 +5,12 @@
   "main": "index.js",  
   "scripts": {  
     "test": "echo \"No tests specified\" && exit 1",  
-    "start": "node index.js"  // Adjust the entry point if needed  
+    "start": "node index.js"
   },  
   "author": "DTI",  
-  "license": "MIT",  // Change as necessary  
+  "license": "MIT" 
   "dependencies": {  
-    "nodemailer": "*"  // Adjust the version as needed  
+    "nodemailer": "*"
   },  
   "engines": {  
     "node": ">=20.0.0"  
