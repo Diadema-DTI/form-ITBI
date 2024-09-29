@@ -1,0 +1,25 @@
+name: Run npm Command  
+
+on:  
+  push:  
+    branches:  
+      - main  # Adjust this to the branch you want to target  
+
+jobs:  
+  build:  
+    runs-on: ubuntu-latest  
+
+    steps:  
+    - name: Checkout repository  
+      uses: actions/checkout@v2  
+
+    - name: Set up Node.js  
+      uses: actions/setup-node@v2  
+      with:  
+        node-version: '14'  # Specify the Node.js version you want  
+
+    - name: Install npm dependencies  
+      run: npm install crypto-js nodemailer
+
+    - name: Run npm command  
+      run: npm init -y  # Replace with your actual npm command
