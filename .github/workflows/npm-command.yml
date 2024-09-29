@@ -12,15 +12,15 @@ jobs:
 
     steps:  
     - name: Checkout repository  
-      uses: actions/checkout@v2  
+      uses: actions/checkout@v3  # Updated to version 3  
 
     - name: Set up Node.js  
-      uses: actions/setup-node@v2  
+      uses: actions/setup-node@v3  # Updated to version 3  
       with:  
-        node-version: '14'  # Specify the Node.js version you want  
+        node-version: '18'  # You can choose a stable LTS version, e.g., 14, 16, or 18  
 
     - name: Install npm dependencies  
-      run: npm install crypto crypto-js nodemailer
+      run: npm install  
 
     - name: Run npm command  
       run: npm run your-command  # Replace with your actual npm command
