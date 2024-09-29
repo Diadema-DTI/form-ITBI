@@ -23,4 +23,4 @@ jobs:
       run: npm install crypto crypto-js nodemailer
 
     - name: Run npm command  
-      run: npm run your-command  # Replace with your actual npm command
+      run: npm init -y  # Replace with your actual npm command
