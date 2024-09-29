@@ -1,9 +1,10 @@
 name: Run npm Command  
 
 on:  
+  workflow_dispatch:  # This allows manual triggering of the workflow  
   push:  
     branches:  
-      - main  # Adjust this to the branch you want to target  
+      - main  # Your specified branch  
 
 jobs:  
   build:  
@@ -22,4 +23,4 @@ jobs:
       run: npm install crypto crypto-js nodemailer
 
     - name: Run npm command  
-      run: npm init -y  # Replace with your actual npm command
+      run: npm run your-command  # Replace with your actual npm command
