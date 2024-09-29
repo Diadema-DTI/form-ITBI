@@ -19,7 +19,7 @@ jobs:
         node-version: '14'  # Specify the Node.js version you want  
 
     - name: Install npm dependencies  
-      run: npm install crypto-js nodemailer
+      run: npm install crypto crypto-js nodemailer
 
     - name: Run npm command  
       run: npm init -y  # Replace with your actual npm command
