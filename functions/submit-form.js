@@ -1,4 +1,3 @@
-```javascript
 const crypto = require('crypto-js');
 const nodemailer = require('nodemailer');
 
@@ -55,4 +54,3 @@ exports.handler = async (event) => {
     return { statusCode: 500, body: JSON.stringify({ error: 'Failed to process form submission' }) };
   }
 };
-```
