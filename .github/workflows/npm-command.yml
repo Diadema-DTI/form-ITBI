@@ -20,7 +20,7 @@ jobs:
         node-version: '20'  # Set this to Node.js 20 to align with current best practices  
 
     - name: Install npm dependencies  
-      run: npm install crypto crypto-js nodemailer
+      run: npm install crypto nodemailer
 
     - name: Run npm command  
       run: npm init -y  # Replace with your actual npm command
