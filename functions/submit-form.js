@@ -7,7 +7,7 @@ exports.handler = async (event) => {
   }
 
   try {
-    const { formData, fileData, fileName } = JSON.parse(event.body);
+    const { formData } = JSON.parse(event.body);
 
     // Decrypt data using the stored private key
     const privateKey = crypto.createPrivateKey(process.env.PRIVATE_KEY);
@@ -20,14 +20,6 @@ exports.handler = async (event) => {
         },
         Buffer.from(formData)
       ).toString()
-    );
-
-    const decryptedFileData = crypto.privateDecrypt(
-      {
-        key: privateKey,
-        padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-      },
-      Buffer.from(fileData)
     );
 
     // Set up email transporter (using Gmail in this example)
@@ -43,21 +35,28 @@ exports.handler = async (event) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.RECIPIENT_EMAILS,
-      subject: 'Nova Submissão de Formulário',
+      subject: 'Nova Submissão de ITBI e Cadastro de Contribuinte',
       text: `
-        Nome: ${decryptedFormData.name}
-        Email: ${decryptedFormData.email}
-        CPF: ${decryptedFormData.cpf}
-        Telefone: ${decryptedFormData.phone}
-        Mensagem: ${decryptedFormData.message}
+        Dados do Imóvel:
+        Inscrição Cadastral: ${decryptedFormData.inscricaoCadastral}
+        Endereço: ${decryptedFormData.endereco}
+
+        Dados da Transação:
+        Tipo de Transação: ${decryptedFormData.tipoTransacao}
+        Valor da Transação: R$ ${decryptedFormData.valorTransacao}
+
+        Dados do Comprador:
+        Nome: ${decryptedFormData.nomeComprador}
+        CPF: ${decryptedFormData.cpfComprador}
+
+        Dados do Vendedor:
+        Nome: ${decryptedFormData.nomeVendedor}
+        CPF: ${decryptedFormData.cpfVendedor}
+
+        IP do Remetente: ${decryptedFormData.ipAddress}
+
         Consentimento dado: ${decryptedFormData.consent ? 'Sim' : 'Não'}
-      `,
-      attachments: [
-        {
-          filename: fileName,
-          content: decryptedFileData
-        }
-      ]
+      `
     };
 
     // Send email
