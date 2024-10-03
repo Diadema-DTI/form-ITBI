@@ -1,6 +1,3 @@
-const { JWT } = require('google-auth-library');
-const { google } = require('googleapis');
-
 exports.handler = async (event, context) => {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
@@ -11,6 +8,10 @@ exports.handler = async (event, context) => {
 
         // Decrypt the data using the stored private key
         const privateKey = process.env.PRIVATE_KEY;
+        if (!privateKey) {
+            throw new Error('PRIVATE_KEY environment variable is not set');
+        }
+
         const decryptedData = crypto.privateDecrypt(
             {
                 key: privateKey,
@@ -27,6 +28,10 @@ exports.handler = async (event, context) => {
             key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
             scopes: ['https://www.googleapis.com/auth/gmail.send'],
         });
+
+        if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY) {
+            throw new Error('Google Cloud credentials are not properly set');
+        }
 
         const gmail = google.gmail({ version: 'v1', auth: client });
 
@@ -56,10 +61,10 @@ exports.handler = async (event, context) => {
             body: JSON.stringify({ message: 'Form submitted successfully' }),
         };
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Detailed error:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to process form submission' }),
+            body: JSON.stringify({ error: `Failed to process form submission: ${error.message}` }),
         };
     }
 };
