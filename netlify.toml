@@ -1,2 +1,10 @@
 [build]
   functions = "functions"
+
+[build.environment]
+  NODE_VERSION = "14"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
