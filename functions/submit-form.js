@@ -1,4 +1,4 @@
-const { GoogleAuth } = require('google-auth-library');
+const { JWT } = require('google-auth-library');
 const { google } = require('googleapis');
 
 exports.handler = async (event, context) => {
@@ -22,10 +22,13 @@ exports.handler = async (event, context) => {
         const formData = JSON.parse(decryptedData.toString());
 
         // Set up Google Cloud authentication
-        const auth = new GoogleAuth({
-            scopes: ['https://www.googleapis.com/auth/gmail.send']
+        const client = new JWT({
+            email: process.env.GOOGLE_CLIENT_EMAIL,
+            key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+            scopes: ['https://www.googleapis.com/auth/gmail.send'],
         });
-        const gmail = google.gmail({ version: 'v1', auth });
+
+        const gmail = google.gmail({ version: 'v1', auth: client });
 
         // Prepare email content
         const emailContent = `
@@ -41,7 +44,7 @@ exports.handler = async (event, context) => {
             userId: 'me',
             requestBody: {
                 raw: Buffer.from(
-                    `To: destinatario@example.com\r\n` +
+                    `To: ${process.env.RECIPIENT_EMAILS}\r\n` +
                     `Subject: Novo Formulário ITBI\r\n\r\n` +
                     emailContent
                 ).toString('base64')
