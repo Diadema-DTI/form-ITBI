@@ -1,14 +1,12 @@
 const crypto = require('crypto');
 
 exports.handler = async (event, context) => {
-  // Set CORS headers
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
   };
 
-  // Handle preflight requests
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
@@ -33,10 +31,16 @@ exports.handler = async (event, context) => {
     // Store the private key securely (e.g., in environment variables)
     process.env.PRIVATE_KEY = privateKey;
 
+    // Remove header and footer from the public key
+    const publicKeyPem = publicKey
+      .replace('-----BEGIN PUBLIC KEY-----', '')
+      .replace('-----END PUBLIC KEY-----', '')
+      .replace(/[\n\r]/g, '');
+
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ publicKeyPem: publicKey })
+      body: JSON.stringify({ publicKeyPem })
     };
   } catch (error) {
     console.error('Error generating key pair:', error);
