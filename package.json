@@ -1,4 +1,4 @@
-{  
+{
   "name": "form-itbi",
   "version": "1.0.0",
   "description": "Form inteligente para ITBI",
@@ -11,13 +11,15 @@
   "license": "MIT",
   "dependencies": {
     "crypto": "^1.0.1",
+    "google-auth-library": "^9.14.1",
     "google-spreadsheet": "^4.1.4",
+    "googleapis": "^144.0.0",
     "moment-timezone": "^0.5.45",
     "nodemailer": "^6.9.15"
   },
   "engines": {
     "node": ">=20.0.0"
   },
-  "devDependencies": {},
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {}
 }
