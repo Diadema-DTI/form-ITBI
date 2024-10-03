@@ -725,6 +725,7 @@
                         }
                     });
             
+                    /*
                     statusMessage.textContent = 'Obtendo chave pública...';
                     const publicKeyResponse = await fetch('https://diadema-dti.netlify.app/.netlify/functions/get-public-key');
                     if (!publicKeyResponse.ok) throw new Error(`Falha ao obter a chave pública. Status: ${publicKeyResponse.status}`);
@@ -734,10 +735,12 @@
                     if (!responseData.publicKeyPem) {
                         throw new Error('A chave pública não foi encontrada na resposta do servidor');
                     }
+                    */
             
                     // Convert PEM to CryptoKey
                     const publicKey = await importPublicKey(responseData.publicKeyPem);
             
+                    /*
                     statusMessage.textContent = 'Criptografando dados...';
                       const publicKey = await importPublicKey(responseData.publicKeyPem);
                       const encryptedData = await window.crypto.subtle.encrypt(
@@ -747,6 +750,7 @@
                         publicKey,
                         new TextEncoder().encode(JSON.stringify(jsonData))
                       );
+                      */
             
                     statusMessage.textContent = 'Enviando formulário...';
                     const response = await fetch('https://diadema-dti.netlify.app/.netlify/functions/submit-form', {
@@ -754,8 +758,11 @@
                         headers: {
                             'Content-Type': 'application/json',
                         },
+                        /*
                         body: JSON.stringify({
                             formData: Array.from(new Uint8Array(encryptedData)),
+                        */
+                        body: JSON.stringify(jsonData),
                         }),
                     });
             
@@ -776,7 +783,8 @@
                 }
             });
             
-            async function importPublicKey(pemKey) {
+        /*    
+        async function importPublicKey(pemKey) {
               try {
                 // Convert base64 to binary
                 const binaryDer = atob(pemKey);
@@ -804,7 +812,9 @@
                 throw new Error('Failed to import public key: ' + error.message);
               }
             }
-            
+            */
+                        
+            /*
             function str2ab(str) {
                 const buf = new ArrayBuffer(str.length);
                 const bufView = new Uint8Array(buf);
@@ -813,6 +823,8 @@
                 }
                 return buf;
             }
+            */
+            
         });
     </script>
 </body>
