@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário ITBI - Prefeitura de Diadema</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+    <h1>Formulário ITBI</h1>
+    <form id="itbiForm">
+        <!-- Basic form fields -->
+        <label for="nomeRequerente">Nome do Requerente:</label>
+        <input type="text" id="nomeRequerente" name="nomeRequerente" required>
+
+        <label for="cpfRequerente">CPF do Requerente:</label>
+        <input type="text" id="cpfRequerente" name="cpfRequerente" required>
+
+        <label for="emailRequerente">Email do Requerente:</label>
+        <input type="email" id="emailRequerente" name="emailRequerente" required>
+
+        <label for="metodoSubmissao">Método de Submissão:</label>
+        <select id="metodoSubmissao" name="metodoSubmissao" required>
+            <option value="">Selecione o método</option>
+            <option value="formulario">Preencher formulário</option>
+            <option value="documentos">Dados constam dos documentos anexados</option>
+        </select>
+
+        <div id="formularioCompleto" style="display:none;">
+            <!-- Additional form fields for full submission -->
+        </div>
+
+        <div id="documentosContainer" style="display:none;">
+            <label for="documentosTransmissao">Inserir Documentos da Transmissão:</label>
+            <input type="file" id="documentosTransmissao" name="documentosTransmissao" multiple>
+        </div>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="form-handler.js"></script>
+</body>
+</html>
