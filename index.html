@@ -728,7 +728,10 @@
                     statusMessage.textContent = 'Obtendo chave pública...';
                     const publicKeyResponse = await fetch('https://diadema-dti.netlify.app/.netlify/functions/get-public-key');
                     if (!publicKeyResponse.ok) throw new Error('Falha ao obter a chave pública');
-                    const { publicKey } = await publicKeyResponse.json();
+                    const { publicKeyPem } = await publicKeyResponse.json();
+            
+                    // Convert PEM to CryptoKey
+                    const publicKey = await importPublicKey(publicKeyPem);
             
                     statusMessage.textContent = 'Criptografando dados...';
                     const encryptedData = await window.crypto.subtle.encrypt(
@@ -766,6 +769,40 @@
                     }, 2000);
                 }
             });
+            
+            // Function to convert PEM to CryptoKey
+            async function importPublicKey(pem) {
+                // Remove headers and convert to binary
+                const pemHeader = "-----BEGIN PUBLIC KEY-----";
+                const pemFooter = "-----END PUBLIC KEY-----";
+                const pemContents = pem.substring(
+                    pemHeader.length,
+                    pem.length - pemFooter.length
+                );
+                const binaryDer = window.atob(pemContents);
+                const binaryDerBuffer = str2ab(binaryDer);
+            
+                return window.crypto.subtle.importKey(
+                    "spki",
+                    binaryDerBuffer,
+                    {
+                        name: "RSA-OAEP",
+                        hash: "SHA-256",
+                    },
+                    true,
+                    ["encrypt"]
+                );
+            }
+            
+            // Helper function to convert string to ArrayBuffer
+            function str2ab(str) {
+                const buf = new ArrayBuffer(str.length);
+                const bufView = new Uint8Array(buf);
+                for (let i = 0, strLen = str.length; i < strLen; i++) {
+                    bufView[i] = str.charCodeAt(i);
+                }
+                return buf;
+            }
         });
     </script>
 </body>
