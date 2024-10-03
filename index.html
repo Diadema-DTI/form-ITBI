@@ -775,20 +775,21 @@
                 }
             });
             
-            async function importPublicKey(pem) {
-                // Remove headers and convert to binary
-                const pemHeader = "-----BEGIN PUBLIC KEY-----";
-                const pemFooter = "-----END PUBLIC KEY-----";
-                const pemContents = pem.substring(
-                    pemHeader.length,
-                    pem.length - pemFooter.length
-                );
-                const binaryDer = window.atob(pemContents);
-                const binaryDerBuffer = str2ab(binaryDer);
+            async function importPublicKey(pemKey) {
+                // Convert base64 to binary
+                const binaryDer = atob(pemKey);
             
+                // Convert binary to ArrayBuffer
+                const buf = new ArrayBuffer(binaryDer.length);
+                const bufView = new Uint8Array(buf);
+                for (let i = 0, strLen = binaryDer.length; i < strLen; i++) {
+                    bufView[i] = binaryDer.charCodeAt(i);
+                }
+            
+                // Import the key
                 return window.crypto.subtle.importKey(
                     "spki",
-                    binaryDerBuffer,
+                    buf,
                     {
                         name: "RSA-OAEP",
                         hash: "SHA-256",
