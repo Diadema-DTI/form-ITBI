@@ -739,13 +739,14 @@
                     const publicKey = await importPublicKey(responseData.publicKeyPem);
             
                     statusMessage.textContent = 'Criptografando dados...';
-                    const encryptedData = await window.crypto.subtle.encrypt(
+                      const publicKey = await importPublicKey(responseData.publicKeyPem);
+                      const encryptedData = await window.crypto.subtle.encrypt(
                         {
-                            name: "RSA-OAEP"
+                          name: "RSA-OAEP"
                         },
                         publicKey,
                         new TextEncoder().encode(JSON.stringify(jsonData))
-                    );
+                      );
             
                     statusMessage.textContent = 'Enviando formulário...';
                     const response = await fetch('https://diadema-dti.netlify.app/.netlify/functions/submit-form', {
@@ -766,16 +767,17 @@
                         alert('Formulário enviado com sucesso! Uma cópia foi enviada para todos os e-mails informados no formulário.');
                     }, 2000);
                 } catch (error) {
-                    console.error('Erro:', error);
-                    statusMessage.textContent = `Erro: ${error.message}`;
-                    setTimeout(() => {
-                        loadingSpinner.classList.add('hidden');
-                        alert(`Erro ao enviar o formulário: ${error.message}. Por favor, tente novamente.`);
-                    }, 2000);
+                  console.error('Erro detalhado:', error);
+                  statusMessage.textContent = `Erro: ${error.message}`;
+                  setTimeout(() => {
+                    loadingSpinner.classList.add('hidden');
+                    alert(`Erro ao enviar o formulário: ${error.message}. Por favor, tente novamente.`);
+                  }, 2000);
                 }
             });
             
             async function importPublicKey(pemKey) {
+              try {
                 // Convert base64 to binary
                 const binaryDer = atob(pemKey);
             
@@ -783,20 +785,24 @@
                 const buf = new ArrayBuffer(binaryDer.length);
                 const bufView = new Uint8Array(buf);
                 for (let i = 0, strLen = binaryDer.length; i < strLen; i++) {
-                    bufView[i] = binaryDer.charCodeAt(i);
+                  bufView[i] = binaryDer.charCodeAt(i);
                 }
             
                 // Import the key
-                return window.crypto.subtle.importKey(
-                    "spki",
-                    buf,
-                    {
-                        name: "RSA-OAEP",
-                        hash: "SHA-256",
-                    },
-                    true,
-                    ["encrypt"]
+                return await window.crypto.subtle.importKey(
+                  "spki",
+                  buf,
+                  {
+                    name: "RSA-OAEP",
+                    hash: "SHA-256",
+                  },
+                  true,
+                  ["encrypt"]
                 );
+              } catch (error) {
+                console.error('Error importing public key:', error);
+                throw new Error('Failed to import public key: ' + error.message);
+              }
             }
             
             function str2ab(str) {
