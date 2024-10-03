@@ -1,18 +1,23 @@
 {  
-  "name": "form-ITBI",  
-  "version": "1.0.0",  
-  "description": "Form inteligente para ITBI",  
-  "main": "index.js",  
-  "scripts": {  
-    "test": "echo \"No tests specified\" && exit 1",  
+  "name": "form-itbi",
+  "version": "1.0.0",
+  "description": "Form inteligente para ITBI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests specified\" && exit 1",
     "start": "node index.js"
-  },  
-  "author": "DTI",  
+  },
+  "author": "DTI",
   "license": "MIT",
-  "dependencies": {  
-    "nodemailer": "*"
-  },  
-  "engines": {  
-    "node": ">=20.0.0"  
-  }  
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "google-spreadsheet": "^4.1.4",
+    "moment-timezone": "^0.5.45",
+    "nodemailer": "^6.9.15"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "devDependencies": {},
+  "keywords": []
 }
