@@ -42,18 +42,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 body: JSON.stringify({ encryptedData }),
             });
-
+    
             if (!response.ok) {
-                throw new Error(`Form submission failed. Status: ${response.status}`);
+                const errorData = await response.json();
+                throw new Error(`Form submission failed. Status: ${response.status}. Message: ${errorData.error}`);
             }
-
+    
             alert('Formulário enviado com sucesso!');
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Detailed error:', error);
             alert(`Erro ao enviar o formulário: ${error.message}`);
         }
     });
-});
 
 async function encryptFormData(data, publicKeyPem) {
     // Convert PEM to CryptoKey
