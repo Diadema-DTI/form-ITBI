@@ -1,0 +1,19 @@
+[build]
+  functions = "functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  GOOGLE_SPREADSHEET_ID = "1WrHqsqQZ1CM8nsF_SfQUEEwtwhz-ZOzx"
+  # Adicione outras variáveis de ambiente aqui, mas não inclua valores sensíveis
+
+[template.environment]
+  GOOGLE_SERVICE_ACCOUNT_EMAIL = "E-mail da conta de serviço do Google"
+  GOOGLE_PRIVATE_KEY = "Chave privada da conta de serviço do Google"
+  SMTP_HOST = "Host do servidor SMTP"
+  SMTP_PORT = "Porta do servidor SMTP"
+  SMTP_USER = "Usuário SMTP"
+  SMTP_PASS = "Senha SMTP"
+  SMTP_FROM = "Endereço de e-mail remetente"
+  LAST_PROTOCOL = "Último número de protocolo gerado"
