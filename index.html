@@ -401,18 +401,18 @@
             const pessoaDiv = document.createElement('div');
             pessoaDiv.className = 'border p-4 mb-4';
             pessoaDiv.innerHTML = `
-            <div class="flex justify-between items-center mb-2">
-                <h3 class="text-xl font-semibold">${tipo === 'adquirentes' ? 'Adquirente' : 'Transmitente'} ${index + 1}</h3>
-                <div>
-                    <button type="button" onclick="toggleCollapse(this)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded mr-2">Colapsar</button>
-                    <button type="button" onclick="removerItem(this, '${tipo}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Remover</button>
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="text-xl font-semibold">${tipo === 'adquirentes' ? 'Adquirente' : 'Transmitente'} ${index + 1}</h3>
+                    <div>
+                        <button type="button" onclick="toggleCollapse(this)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-1 px-2 rounded mr-2">Colapsar</button>
+                        <button type="button" onclick="removerItem(this, '${tipo}')" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">Remover</button>
+                    </div>
                 </div>
-            </div>
-            <div class="collapsible-content">
+                <div class="collapsible-content">
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2">
                             Tipo de Pessoa
-                            <span class="tooltip">ℹ️
+                            <span class="tooltip"ℹ️
                                 <span class="tooltiptext">Selecione se é pessoa física ou jurídica</span>
                             </span>
                         </label>
@@ -428,7 +428,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Nome${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Nome / Razão Social
+                            Nome / Razão Social *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome completo ou razão social</span>
                             </span>
@@ -436,17 +436,26 @@
                         <input type="text" id="${tipo}Nome${index}" name="${tipo}Nome${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
-                        <label for="${tipo}Cep${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            CEP
+                        <label for="${tipo}Rg${index}" class="block text-gray-700 text-sm font-bold mb-2">
+                            RG *
                             <span class="tooltip">ℹ️
+                                <span class="tooltiptext">Digite o número do RG</span>
+                            </span>
+                        </label>
+                        <input type="text" id="${tipo}Rg${index}" name="${tipo}Rg${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    </div>
+                    <div class="mb-4">
+                        <label for="${tipo}Cep${index}" class="block text-gray-700 text-sm font-bold mb-2">
+                            CEP ${tipo === 'adquirentes' ? '*' : ''}
+                            <span class="tooltip"ℹ️
                                 <span class="tooltiptext">Digite o CEP</span>
                             </span>
                         </label>
-                        <input type="text" id="${tipo}Cep${index}" name="${tipo}Cep${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="${tipo}Cep${index}" name="${tipo}Cep${index}" ${tipo === 'adquirentes' ? 'required' : ''} class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Logradouro${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Logradouro
+                            Logradouro *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome da rua, avenida, etc.</span>
                             </span>
@@ -455,7 +464,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Numero${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Número
+                            Número *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o número do endereço</span>
                             </span>
@@ -473,7 +482,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Bairro${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Bairro
+                            Bairro *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome do bairro</span>
                             </span>
@@ -482,7 +491,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Cidade${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Cidade
+                            Cidade *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome da cidade</span>
                             </span>
@@ -491,15 +500,40 @@
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Estado${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Estado
+                            Estado *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Selecione o estado</span>
                             </span>
                         </label>
                         <select id="${tipo}Estado${index}" name="${tipo}Estado${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
                             <option value="SP">São Paulo</option>
-                            <!-- Adicione outros estados conforme necessário -->
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
                         </select>
                     </div>
                     <div class="mb-4">
@@ -509,7 +543,7 @@
                                 <span class="tooltiptext">Digite o número de telefone</span>
                             </span>
                         </label>
-                        <input type="tel" id="${tipo}Telefone${index}" name="${tipo}Telefone${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="tel" id="${tipo}Telefone${index}" name="${tipo}Telefone${index}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="${tipo}Email${index}" class="block text-gray-700 text-sm font-bold mb-2">
@@ -518,7 +552,7 @@
                                 <span class="tooltiptext">Digite o endereço de e-mail</span>
                             </span>
                         </label>
-                        <input type="email" id="${tipo}Email${index}" name="${tipo}Email${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="email" id="${tipo}Email${index}" name="${tipo}Email${index}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                 </div>
             `;
@@ -554,10 +588,12 @@
         // Função para validar o formulário
         function validateForm() {
             const form = document.getElementById('itbiForm');
-            const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
         
-            requiredFields.forEach(field => {
+            // Validate Requerente
+            const requiredRequerenteFields = ['nomeUsuario', 'emailUsuario', 'telefoneUsuario', 'cpfCnpj'];
+            requiredRequerenteFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
                 if (!field.value.trim()) {
                     isValid = false;
                     field.classList.add('border-red-500');
@@ -566,8 +602,58 @@
                 }
             });
         
+            // Validate Adquirentes
+            const adquirentes = document.querySelectorAll('#adquirentes > div');
+            adquirentes.forEach((adquirente, index) => {
+                const requiredFields = ['Nome', 'Cpf', 'Rg', 'Cep', 'Logradouro', 'Numero', 'Bairro', 'Cidade', 'Estado'];
+                requiredFields.forEach(field => {
+                    const input = adquirente.querySelector(`#adquirentes${field}${index}`);
+                    if (input && !input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else if (input) {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+            });
+        
+            // Validate Transmitentes
+            const transmitentes = document.querySelectorAll('#transmitentes > div');
+            transmitentes.forEach((transmitente, index) => {
+                const requiredFields = ['Nome', 'Cpf', 'Rg', 'Logradouro', 'Numero', 'Bairro', 'Cidade', 'Estado'];
+                requiredFields.forEach(field => {
+                    const input = transmitente.querySelector(`#transmitentes${field}${index}`);
+                    if (input && !input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else if (input) {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+            });
+        
+            // Validate Imóveis
+            const imoveis = document.querySelectorAll('#imoveis > div');
+            imoveis.forEach((imovel, index) => {
+                const requiredFields = ['inscricaoImobiliaria', 'cepImovel', 'logradouroImovel', 'numeroImovel', 'bairroImovel', 'cidadeImovel', 'estadoImovel', 'percentualTransacionado', 'valorTotal'];
+                requiredFields.forEach(field => {
+                    const input = imovel.querySelector(`#${field}${index}`);
+                    if (input && !input.value.trim()) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else if (input) {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+            });
+        
+            if (!isValid) {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+            }
+        
             return isValid;
         }
+
         
         // Função para lidar com o envio do formulário
         async function handleSubmit(event) {
@@ -644,7 +730,7 @@
                 <div class="collapsible-content">
                     <div class="mb-4">
                         <label for="inscricaoImobiliaria${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Inscrição Imobiliária
+                            Inscrição Imobiliária *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o número de inscrição imobiliária do imóvel</span>
                             </span>
@@ -658,11 +744,11 @@
                                 <span class="tooltiptext">Digite o número de matrícula do imóvel</span>
                             </span>
                         </label>
-                        <input type="text" id="matriculaImovel${index}" name="matriculaImovel${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="matriculaImovel${index}" name="matriculaImovel${index}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="cepImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            CEP
+                            CEP *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o CEP do imóvel</span>
                             </span>
@@ -671,7 +757,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="logradouroImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Logradouro
+                            Logradouro *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome da rua, avenida, etc.</span>
                             </span>
@@ -680,7 +766,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="numeroImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Número
+                            Número *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o número do imóvel</span>
                             </span>
@@ -698,7 +784,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="bairroImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Bairro
+                            Bairro *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome do bairro</span>
                             </span>
@@ -707,7 +793,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="cidadeImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Cidade
+                            Cidade *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite o nome da cidade</span>
                             </span>
@@ -716,15 +802,40 @@
                     </div>
                     <div class="mb-4">
                         <label for="estadoImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Estado
+                            Estado *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Selecione o estado</span>
                             </span>
                         </label>
                         <select id="estadoImovel${index}" name="estadoImovel${index}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <option value="">Selecione</option>
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
                             <option value="SP">São Paulo</option>
-                            <!-- Adicione outros estados conforme necessário -->
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
                         </select>
                     </div>
                     <div class="mb-4">
@@ -734,7 +845,7 @@
                                 <span class="tooltiptext">Digite a área total do terreno em metros quadrados</span>
                             </span>
                         </label>
-                        <input type="text" id="areaTerreno${index}" name="areaTerreno${index}" onInput="formatDouble(this)" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="areaTerreno${index}" name="areaTerreno${index}" onInput="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="areaConstrucao${index}" class="block text-gray-700 text-sm font-bold mb-2">
@@ -743,25 +854,25 @@
                                 <span class="tooltiptext">Digite a área construída em metros quadrados</span>
                             </span>
                         </label>
-                        <input type="text" id="areaConstrucao${index}" name="areaConstrucao${index}" onInput="formatDouble(this)" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="areaConstrucao${index}" name="areaConstrucao${index}" onInput="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="percentualTransacionado${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Porcentagem do Imóvel Transacionada (%)
+                            Porcentagem do Imóvel Transacionada (%) *
                             <span class="tooltip">ℹ️
                                 <span class="tooltiptext">Digite a porcentagem do imóvel que está sendo transacionada</span>
                             </span>
                         </label>
-                        <input type="text" id="percentualTransacionado${index}" name="percentualTransacionado${index}" onInput="formatPercentage(this)" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="percentualTransacionado${index}" name="percentualTransacionado${index}" required onInput="formatPercentage(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
-                        <label for="outrosDadosImovel${index}" class="block text-gray-700 text-sm font-bold mb-2">
-                            Outros Dados
+                        <label for="valorTotal${index}" class="block text-gray-700 text-sm font-bold mb-2">
+                            Valor Total da Transação (R$) *
                             <span class="tooltip">ℹ️
-                                <span class="tooltiptext">Forneça informações adicionais sobre o imóvel, se necessário</span>
+                                <span class="tooltiptext">Digite o valor total da transação imobiliária</span>
                             </span>
                         </label>
-                        <textarea id="outrosDadosImovel${index}" name="outrosDadosImovel${index}" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        <input type="text" id="valorTotal${index}" name="valorTotal${index}" required onInput="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                 </div>
             `;
@@ -811,7 +922,7 @@
         function formatDouble(input) {
             let value = input.value.replace(/[^0-9.]/g, '');
             value = parseFloat(value).toFixed(2);
-            input.value = value.replace('.', ',');
+            input.value = value.replace('.', ',') + ' m²';
         }
         
         // Initialization function
@@ -824,6 +935,33 @@
             const secoesDinamicas = document.getElementById('secoesDinamicas');
             const secaoAnexos = document.getElementById('secaoAnexos');
             const lgpdContent = document.getElementById('lgpdContent');
+            const requerenteHTML = `
+                <div class="mb-4">
+                    <label for="nomeUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        Nome Completo / Razão Social *
+                    </label>
+                    <input type="text" id="nomeUsuario" name="nomeUsuario" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="emailUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        E-mail *
+                    </label>
+                    <input type="email" id="emailUsuario" name="emailUsuario" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="telefoneUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        Telefone *
+                    </label>
+                    <input type="tel" id="telefoneUsuario" name="telefoneUsuario" required onInput="maskPhone(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="cpfCnpj" class="block text-gray-700 text-sm font-bold mb-2">
+                        CPF *
+                    </label>
+                    <input type="text" id="cpfCnpj" name="cpfCnpj" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+            `;
+
 
             // Event listeners
             tipoPessoaRadios.forEach(radio => radio.addEventListener('change', updateCpfCnpjField));
@@ -838,6 +976,7 @@
         
         // Initialize the form when the DOM is loaded
         document.addEventListener('DOMContentLoaded', initForm);
+        document.querySelector('#dadosRequerente').innerHTML = requerenteHTML;
     </script>
 </body>
 </html>
