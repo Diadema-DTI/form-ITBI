@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário ITBI - Prefeitura de Diadema</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <style>
+        /* Estilos personalizados aqui */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8">
+            <img src="https://portal.diadema.sp.gov.br/wp-content/uploads/2021/07/Prancheta-2.png" alt="Prefeitura de Diadema" class="mx-auto h-24">
+            <h1 class="text-3xl font-bold text-center mt-4">Formulário ITBI - Imposto Sobre Transmissão Onerosa de Bens Imóveis</h1>
+        </header>
+
+        <form id="itbiForm" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <!-- Dados do Usuário -->
+            <section class="mb-6">
+                <h2 class="text-2xl font-semibold mb-4">Dados do Usuário</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Tipo de Pessoa
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Selecione se você é uma pessoa física ou jurídica</span>
+                        </span>
+                    </label>
+                    <div class="flex items-center">
+                        <input type="radio" id="pessoaFisica" name="tipoPessoa" value="fisica" required class="mr-2">
+                        <label for="pessoaFisica" class="mr-4">Pessoa Física</label>
+                        <input type="radio" id="pessoaJuridica" name="tipoPessoa" value="juridica" required class="mr-2">
+                        <label for="pessoaJuridica">Pessoa Jurídica</label>
+                    </div>
+                </div>
+                <div class="mb-4" id="cpfCnpjContainer">
+                    <!-- CPF/CNPJ field will be dynamically added here -->
+                </div>
+                <div class="mb-4">
+                    <label for="nomeUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        Nome Completo / Razão Social
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Digite seu nome completo ou a razão social da empresa</span>
+                        </span>
+                    </label>
+                    <input type="text" id="nomeUsuario" name="nomeUsuario" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="telefoneUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        Telefone
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Digite seu número de telefone no formato (XX) XXXXX-XXXX</span>
+                        </span>
+                    </label>
+                    <input type="tel" id="telefoneUsuario" name="telefoneUsuario" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div class="mb-4">
+                    <label for="emailUsuario" class="block text-gray-700 text-sm font-bold mb-2">
+                        E-mail
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Digite seu endereço de e-mail válido</span>
+                        </span>
+                    </label>
+                    <input type="email" id="emailUsuario" name="emailUsuario" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+            </section>
+
+            <!-- Opção de preenchimento -->
+            <section class="mb-6">
+                <h2 class="text-2xl font-semibold mb-4">Opção de Preenchimento</h2>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">
+                        Como deseja fornecer os dados?
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Escolha se deseja preencher o formulário completo ou anexar documentos</span>
+                        </span>
+                    </label>
+                    <div class="flex items-center">
+                        <input type="radio" id="preencherFormulario" name="opcaoPreenchimento" value="formulario" required class="mr-2">
+                        <label for="preencherFormulario" class="mr-4">Preencher formulário completo</label>
+                        <input type="radio" id="anexarDocumentos" name="opcaoPreenchimento" value="anexos" required class="mr-2">
+                        <label for="anexarDocumentos">Anexar documentos</label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seções dinâmicas (serão mostradas/ocultadas conforme a escolha do usuário) -->
+            <div id="secoesDinamicas" style="display: none;">
+                <!-- Dados da Transmissão Imobiliária -->
+                <section class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Dados da Transmissão Imobiliária</h2>
+                    <!-- Campos para Dados da Transmissão Imobiliária serão adicionados aqui -->
+                </section>
+
+                <!-- Dados do Imóvel -->
+                <section class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Dados do Imóvel</h2>
+                    <!-- Campos para Dados do Imóvel serão adicionados aqui -->
+                </section>
+
+                <!-- Dados do Adquirente -->
+                <section class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Dados do Adquirente</h2>
+                    <!-- Campos para Dados do Adquirente serão adicionados aqui -->
+                </section>
+
+                <!-- Dados do Transmitente -->
+                <section class="mb-6">
+                    <h2 class="text-2xl font-semibold mb-4">Dados do Transmitente</h2>
+                    <!-- Campos para Dados do Transmitente serão adicionados aqui -->
+                </section>
+            </div>
+
+            <!-- Seção de anexos -->
+            <section class="mb-6" id="secaoAnexos" style="display: none;">
+                <h2 class="text-2xl font-semibold mb-4">Anexar Documentos</h2>
+                <div class="mb-4">
+                    <label for="anexos" class="block text-gray-700 text-sm font-bold mb-2">
+                        Selecione os arquivos para anexar
+                        <span class="tooltip">ℹ️
+                            <span class="tooltiptext">Anexe arquivos de imagem, PDF ou MS-Office até 5MB cada</span>
+                        </span>
+                    </label>
+                    <input type="file" id="anexos" name="anexos" multiple accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+            </section>
+
+            <!-- LGPD Disclaimer -->
+            <section class="mb-6">
+                <h2 class="text-2xl font-semibold mb-4">
+                    <button type="button" id="lgpdToggle" class="flex items-center focus:outline-none">
+                        <span class="mr-2">Aviso de Privacidade (LGPD)</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                </h2>
+                <div id="lgpdContent" class="hidden bg-gray-100 p-4 rounded">
+                    <p class="text-sm">
+                        De acordo com a Lei Geral de Proteção de Dados (LGPD), informamos que os dados pessoais coletados neste formulário serão utilizados exclusivamente para fins de processamento do ITBI pela Prefeitura de Diadema. A Divisão de Tributos Imobiliários é responsável pelo tratamento desses dados. Para mais informações ou dúvidas, entre em contato através do e-mail: dti@diadema.sp.gov.br
+                    </p>
+                </div>
+            </section>
+
+            <!-- Botão de envio -->
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Enviar Formulário
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js"></script>
+    <!-- O script JavaScript será adicionado aqui -->
+</body>
+</html>
