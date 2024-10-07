@@ -620,7 +620,7 @@
             // Validate Transmitentes
             const transmitentes = document.querySelectorAll('#transmitentes > div');
             transmitentes.forEach((transmitente, index) => {
-                const requiredFields = ['Nome', 'Cpf', 'Rg', 'Logradouro', 'Numero', 'Bairro', 'Cidade', 'Estado'];
+                const requiredFields = ['Nome', 'Cpf', 'Rg', 'Cep', 'Logradouro', 'Numero', 'Bairro', 'Cidade', 'Estado'];
                 requiredFields.forEach(field => {
                     const input = transmitente.querySelector(`#transmitentes${field}${index}`);
                     if (input && !input.value.trim()) {
@@ -908,22 +908,69 @@
         }
 
         function formatPercentage(input) {
-            let value = input.value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value).toFixed(2);
+            // Remove any non-digit and non-comma characters
+            let value = input.value.replace(/[^0-9,]/g, '');
+        
+            // Replace comma with dot for parsing
+            value = value.replace(',', '.');
+        
+            // Parse the number
+            value = parseFloat(value);
+        
+            // Handle NaN cases
+            if (isNaN(value)) {
+                value = 0;
+            }
+        
+            // Fix to two decimal places
+            value = value.toFixed(2);
+        
+            // Replace dot back to comma
+            value = value.replace('.', ',');
+        
+            // Append percentage sign
             input.value = value + '%';
         }
         
         function formatCurrency(input) {
+            // Remove any non-digit characters
             let value = input.value.replace(/\D/g, '');
+        
+            // Divide by 100 to convert cents to reais
             value = (parseFloat(value) / 100).toFixed(2);
-            input.value = 'R$ ' + value.replace('.', ',');
+        
+            // Replace dot with comma
+            value = value.replace('.', ',');
+        
+            // Prepend currency symbol
+            input.value = 'R$ ' + value;
         }
         
         function formatDouble(input) {
-            let value = input.value.replace(/[^0-9.]/g, '');
-            value = parseFloat(value).toFixed(2);
-            input.value = value.replace('.', ',') + ' m²';
+            // Remove any non-digit and non-comma characters
+            let value = input.value.replace(/[^0-9,]/g, '');
+        
+            // Replace comma with dot for parsing
+            value = value.replace(',', '.');
+        
+            // Parse the number
+            value = parseFloat(value);
+        
+            // Handle NaN cases
+            if (isNaN(value)) {
+                value = 0;
+            }
+        
+            // Fix to two decimal places
+            value = value.toFixed(2);
+        
+            // Replace dot back to comma
+            value = value.replace('.', ',');
+        
+            // Append ' m²'
+            input.value = value + ' m²';
         }
+
         
         // Initialization function
         function initForm() {
