@@ -250,7 +250,7 @@
                             <span class="tooltiptext">Digite o valor total da transação imobiliária</span>
                         </span>
                     </label>
-                    <input type="text" id="valorTotal" name="valorTotal" onInput="formatCurrency(this)" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="valorTotal" name="valorTotal" onblur="formatCurrency(this)" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
                     <label for="valorAVista" class="block text-gray-700 text-sm font-bold mb-2">
@@ -259,7 +259,7 @@
                             <span class="tooltiptext">Digite o valor pago à vista, se houver</span>
                         </span>
                     </label>
-                    <input type="text" id="valorAVista" name="valorAVista" onInput="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="valorAVista" name="valorAVista" onblur="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
                     <label for="valorFinanciado" class="block text-gray-700 text-sm font-bold mb-2">
@@ -268,7 +268,7 @@
                             <span class="tooltiptext">Digite o valor financiado, se houver</span>
                         </span>
                     </label>
-                    <input type="text" id="valorFinanciado" name="valorFinanciado" onInput="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="valorFinanciado" name="valorFinanciado" onblur="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
                     <label for="dataTransmissao" class="block text-gray-700 text-sm font-bold mb-2">
@@ -864,7 +864,7 @@
                                 <span class="tooltiptext">Digite a área total do terreno em metros quadrados</span>
                             </span>
                         </label>
-                        <input type="text" id="areaTerreno${index}" name="areaTerreno${index}" onInput="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="areaTerreno${index}" name="areaTerreno${index}" onblur="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="areaConstrucao${index}" class="block text-gray-700 text-sm font-bold mb-2">
@@ -873,7 +873,7 @@
                                 <span class="tooltiptext">Digite a área construída em metros quadrados</span>
                             </span>
                         </label>
-                        <input type="text" id="areaConstrucao${index}" name="areaConstrucao${index}" onInput="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="areaConstrucao${index}" name="areaConstrucao${index}" onblur="formatDouble(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="percentualTransacionado${index}" class="block text-gray-700 text-sm font-bold mb-2">
@@ -882,7 +882,7 @@
                                 <span class="tooltiptext">Digite a porcentagem do imóvel que está sendo transacionada</span>
                             </span>
                         </label>
-                        <input type="text" id="percentualTransacionado${index}" name="percentualTransacionado${index}" required onInput="formatPercentage(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="percentualTransacionado${index}" name="percentualTransacionado${index}" required onblur="formatPercentage(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                     <div class="mb-4">
                         <label for="valorTotal${index}" class="block text-gray-700 text-sm font-bold mb-2">
@@ -891,7 +891,7 @@
                                 <span class="tooltiptext">Digite o valor total da transação imobiliária</span>
                             </span>
                         </label>
-                        <input type="text" id="valorTotal${index}" name="valorTotal${index}" required onInput="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        <input type="text" id="valorTotal${index}" name="valorTotal${index}" required onblur="formatCurrency(this)" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     </div>
                 </div>
             `;
